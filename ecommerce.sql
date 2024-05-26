@@ -1,126 +1,73 @@
+
+DROP TABLE IF EXISTS RandomTable;
+DROP TABLE IF EXISTS OrderDetails;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS UserRoles;
+DROP TABLE IF EXISTS Roles;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Categories;
+
 CREATE TABLE Users (
-
     UserID INT PRIMARY KEY,
-
     UserName VARCHAR(100) NOT NULL,
-
     UserEmail VARCHAR(100) UNIQUE NOT NULL,
-
     RegistrationDate DATE NOT NULL
-
 );
-
-
 
 CREATE TABLE Roles (
-
     RoleID INT PRIMARY KEY,
-
     RoleName VARCHAR(50) NOT NULL
-
 );
-
-
 
 CREATE TABLE UserRoles (
-
     UserID INT,
-
     RoleID INT,
-
     PRIMARY KEY (UserID, RoleID),
-
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
-
     FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
-
 );
-
-
 
 CREATE TABLE Products (
-
     ProductID INT PRIMARY KEY,
-
     ProductName VARCHAR(100) NOT NULL,
-
     ProductDescription TEXT,
-
     Price DECIMAL(10, 2) NOT NULL,
-
     Stock INT NOT NULL,
-
     CategoryID INT
-
 );
-
-
 
 CREATE TABLE Orders (
-
     OrderID INT PRIMARY KEY,
-
     UserID INT,
-
     OrderDate DATE NOT NULL,
-
     TotalAmount DECIMAL(10, 2) NOT NULL,
-
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
-
 );
-
-
 
 CREATE TABLE OrderDetails (
-
     OrderDetailID INT PRIMARY KEY,
-
     OrderID INT,
-
     ProductID INT,
-
     Quantity INT NOT NULL,
-
     Price DECIMAL(10, 2) NOT NULL,
-
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
-
 );
-
-
 
 CREATE TABLE Categories (
-
     CategoryID INT PRIMARY KEY,
-
     CategoryName VARCHAR(100) NOT NULL
-    
-
-
 );
-
-
 
 CREATE TABLE RandomTable (
-
     a INT PRIMARY KEY,      -- This could be ProductID (reference)
-
     b INT,                  -- This could be Category ID (Value)
-
     c DATE,                 -- This could be Date added or modified
-
     d INT,                  -- This could be Stock Quantity or some flag
-
     FOREIGN KEY (a) REFERENCES Products(ProductID),
-
     FOREIGN KEY (b) REFERENCES Categories(CategoryID)
-
 );
-
-
 
 -- Populating basic values
 
@@ -138,13 +85,11 @@ VALUES
     (9, 'Emily Wilson', 'emily@example.com', '2020-09-01'),
     (10, 'Daniel Moore', 'daniel@example.com', '2020-10-01');
 
-
 INSERT INTO Roles 
     (RoleID, RoleName) 
 VALUES 
     (1, 'Admin'), 
-    (2, 'Customer'),
-
+    (2, 'Customer');
 
 INSERT INTO UserRoles 
     (UserID, RoleID) 
@@ -160,7 +105,6 @@ VALUES
     (9, 2),
     (10, 2);
 
-
 INSERT INTO Categories 
     (CategoryID, CategoryName) 
 VALUES 
@@ -174,7 +118,6 @@ VALUES
     (8, 'Automotive'),
     (9, 'Grocery & Gourmet Food'),
     (10, 'Office Products');
-
 
 INSERT INTO Products 
     (ProductID, ProductName, ProductDescription, Price, Stock, CategoryID) 
@@ -204,7 +147,6 @@ VALUES
     (28, 'Novel', 'Best Selling Novel', 14.99, 40, 2),
     (29, 'Office Chair', 'Ergonomic Office Chair', 89.99, 15, 4),
     (30, 'Protein Powder', 'Whey Protein', 39.99, 20, 6);
-    
 
 INSERT INTO Orders 
     (OrderID, UserID, OrderDate, TotalAmount) 
@@ -215,7 +157,6 @@ VALUES
     (4, 4, '2021-10-13', 299.99),
     (5, 5, '2021-10-14', 79.99);
 
-
 INSERT INTO OrderDetails 
     (OrderDetailID, OrderID, ProductID, Quantity, Price) 
 VALUES 
@@ -225,7 +166,6 @@ VALUES
     (4, 3, 5, 1, 499.99),
     (5, 4, 7, 1, 299.99),
     (6, 5, 13, 1, 79.99);
-
 
 INSERT INTO RandomTable 
     (a, b, c, d) 

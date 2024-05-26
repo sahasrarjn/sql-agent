@@ -1,15 +1,11 @@
 import io
 import sys
 import streamlit as st
-from langchain_openai import ChatOpenAI
-from langchain_community.utilities import SQLDatabase
-from langchain_community.agent_toolkits import create_sql_agent
+from custom_sql_agent import custom_sql_agent, langchain_sql_agent
 from dotenv import load_dotenv
-import os
 import pandas as pd
 import plotly.express as px
 
-from prompts import SQL_PREFIX
 load_dotenv()
 
 class StreamToText(io.StringIO):
@@ -30,17 +26,8 @@ output_capture = StreamToText()
 # Redirect the standard output to the instance of the class
 sys.stdout = output_capture
 
-mysql_uri = os.getenv('MYSQL_URI', 'mysql+mysqlconnector://root:testpass@localhost:3306/Chinook')
-db = SQLDatabase.from_uri(mysql_uri)
-
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
-agent_executor = create_sql_agent(
-    llm, 
-    db=db, 
-    agent_type="openai-tools", 
-    verbose=True,
-    prefix=SQL_PREFIX,
-)
+agent_executor = langchain_sql_agent
+# agent_executor = custom_sql_agent
 
 def visualize_data(data):
     if not data.empty:
