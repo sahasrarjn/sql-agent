@@ -67,14 +67,15 @@ def main():
             
             # Fetch the data using the generated SQL query
             query = result['output']
-            data = pd.read_sql_query(query, db.engine)
+            # data = pd.read_sql_query(query, db.engine)
             
             # Display the data
             st.write("## Query Results")
-            st.dataframe(data)
+            st.write(f"SQL Query: {query}")
+            # st.dataframe(data)
             
             # Visualize the data
-            visualize_data(data)
+            # visualize_data(data)
             
         except Exception as e:
             st.error(f"An error occurred: {e}")

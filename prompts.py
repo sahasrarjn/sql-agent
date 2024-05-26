@@ -14,6 +14,8 @@ DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the databa
 If the question does not seem related to the database, just return "I don't know" as the answer.
 
 Don't change or summarize the SQL output. Keep it in the tabular format.
+
+Return the SQL query you used to get the answer in the "SQL Query" field.
 """
 
 SQL_SUFFIX = """Begin!
