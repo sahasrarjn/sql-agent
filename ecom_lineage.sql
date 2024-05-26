@@ -9,4 +9,4 @@ INSERT INTO Lineage (`from`, `to`) VALUES
 ('Products.ProductID', 'OrderDetails.ProductID'),
 ('Orders.OrderID', 'OrderDetails.OrderID'),
 ('Products.ProductID', 'RandomTable.a'),
-('Products.ProductName', 'RandomTable.b');
+('Categories.CategoryID', 'RandomTable.b');
